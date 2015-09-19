@@ -1,2 +1,2 @@
 1 /etc/passwd  /bin/sh 修改成/bin/bash  用户名就可以看到
-2 
+2 test
