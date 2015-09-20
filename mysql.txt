@@ -1,0 +1,29 @@
+ 1 ubuntu 修改mysql默认数据存储路径
+   rm -rf /opt/data/mysql
+   mkdir -p /opt/data/mysql
+   cp -R /var/lib/mysql/*  /opt/data/mysql
+   chown -R mysql:mysql /opt/data/mysql 
+   vim /etc/mysql/my.cnf  datadir=/opt/data/mysql  
+
+   vim /etc/apparmor.d/usr.sbin.mysqld
+   把
+   /var/lib/mysql r,
+   /var/lib/mysql/** rwk,
+   改成
+   /opt/data/mysql r,
+   /opt/data/mysql/** rwk, 
+
+   vim /etc/apparmor.d/abstractions/mysql 
+   注释 #   /var/lib/mysql/mysql.sock rw,
+   添加     /opt/data/mysql/mysql.sock rw,
+   
+   /etc/init.d/apparmor restart
+   /etc/init.d/mysql restart
+
+2   mysql 工具 （Ubuntu Navicat for MySQL）
+    支持中文  locale -a  
+    修改字符集: export LANG=zh_CN.utf8
+    破解 /home/user/.navicat/system.reg 删除   
+    
+3   mysql -uroot -Dstock -p 登录
+   
