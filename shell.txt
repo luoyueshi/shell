@@ -1,3 +1,5 @@
 1 /etc/passwd  /bin/sh 修改成/bin/bash  用户名就可以看到
 2 mysql -uroot -Dstock -p
 3 ubuntu无线网卡掉线 sudo restart network-manager
+4 cd - 进入上次访问的目录  例子 cd /dir1 cd /dir2 cd - 进入dir1
+5 

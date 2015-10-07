@@ -17,8 +17,9 @@
    注释 #   /var/lib/mysql/mysql.sock rw,
    添加     /opt/data/mysql/mysql.sock rw,
    
-   /etc/init.d/apparmor restart
-   /etc/init.d/mysql restart
+   重启
+   sudo /etc/init.d/apparmor restart
+   sudo /etc/init.d/mysql restart
 
 2   mysql 工具 （Ubuntu Navicat for MySQL）
     支持中文  locale -a  
@@ -26,4 +27,24 @@
     破解 /home/user/.navicat/system.reg 删除   
     
 3   mysql -uroot -Dstock -p 登录
+
+4   数据存储中文
+    4.1  create database yourDB CHARACTER SET gbk;
+    4.2  ALTER DATABASE test DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;
+    4.3  ALTER TABLE `category` DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;
+    4.4  ALTER TABLE `test` CHANGE `dd`  VARCHAR( 45 ) CHARACTER SET gbk COLLATE gbk_chinese_ci NOT NULL
+
+5   测试使用中文
+    drop database stock;
+    create database stock CHARACTER SET utf8;
+    use stock;
+    create table t1(a char(10));
+    insert into t1 values('历史');
+    select * from t1;
+
+6   获取字段名
+    select COLUMN_NAME from information_schema.COLUMNS
+    where table_name = 'your_table_name'
+    and table_schema = 'your_db_name';
+    
    
